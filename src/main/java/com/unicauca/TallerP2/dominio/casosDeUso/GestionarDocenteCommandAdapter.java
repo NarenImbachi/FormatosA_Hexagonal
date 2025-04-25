@@ -1,11 +1,14 @@
 package com.unicauca.TallerP2.dominio.casosDeUso;
 
+import org.springframework.stereotype.Service;
+
 import com.unicauca.TallerP2.aplicacion.input.IDocenteCommandInputPort;
 import com.unicauca.TallerP2.aplicacion.output.IDocenteCommandRepositoryPort;
 import com.unicauca.TallerP2.aplicacion.output.IDocenteQueryRepositoryPort;
 import com.unicauca.TallerP2.aplicacion.output.IFormeadorResultadoOutputPort;
 import com.unicauca.TallerP2.dominio.Modelos.Docente;
 
+@Service
 public class GestionarDocenteCommandAdapter implements IDocenteCommandInputPort {
     private final IDocenteCommandRepositoryPort docenteCommandRepositoryPort;
     private final IFormeadorResultadoOutputPort formeadorResultadoOutputPort;

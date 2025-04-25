@@ -10,12 +10,12 @@ import com.unicauca.TallerP2.dominio.casosDeUso.GestionarDocenteCommandAdapter;
 
 @Configuration
 public class BeanConfiguratios {
-    @Bean
-    public GestionarDocenteCommandAdapter gestionarDocenteCommandAdapter(IDocenteCommandRepositoryPort docenteCommandRepositoryPort, 
-            IFormeadorResultadoOutputPort formeadorResultadoOutputPort, IDocenteQueryRepositoryPort docenteQueryRepositoryPort) {
+    // @Bean
+    // public GestionarDocenteCommandAdapter gestionarDocenteCommandAdapter(IDocenteCommandRepositoryPort docenteCommandRepositoryPort, 
+    //         IFormeadorResultadoOutputPort formeadorResultadoOutputPort, IDocenteQueryRepositoryPort docenteQueryRepositoryPort) {
         
-        return new GestionarDocenteCommandAdapter(docenteCommandRepositoryPort, formeadorResultadoOutputPort, docenteQueryRepositoryPort);
-    }
+    //     return new GestionarDocenteCommandAdapter(docenteCommandRepositoryPort, formeadorResultadoOutputPort, docenteQueryRepositoryPort);
+    // }
 
 
 }
