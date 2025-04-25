@@ -1,10 +1,13 @@
 package com.unicauca.TallerP2.infraestructura.output.Formateador;
 
+import org.springframework.stereotype.Service;
+
 import com.unicauca.TallerP2.aplicacion.output.IFormeadorResultadoOutputPort;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadNoExisteException;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
 
+@Service
 public class FormateadorResultadosImplAdapter implements IFormeadorResultadoOutputPort {
 
     @Override

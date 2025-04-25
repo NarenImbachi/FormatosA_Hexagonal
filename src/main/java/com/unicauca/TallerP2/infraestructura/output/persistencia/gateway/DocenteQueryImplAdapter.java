@@ -32,5 +32,11 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
     public boolean existeDocente(Integer idDocente) {
         return docenteRepositorio.existsById(idDocente);
     }
+
+    @Override
+    public boolean existeDocentePorCorreo(String correo) {
+        DocenteEntity docenteEntity = docenteRepositorio.findByCorreo(correo);
+        return docenteEntity != null;
+    }
     
 }

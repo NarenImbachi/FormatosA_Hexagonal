@@ -6,5 +6,4 @@ public interface IDocenteCommandRepositoryPort {
     public Docente crearDocente(Docente docente);
     public Docente modificarDocente(Docente docente);
     public String cambiarEstadoDocente(int idDocente);
-    public boolean existeDocentePorCorreo(String correo);
 }

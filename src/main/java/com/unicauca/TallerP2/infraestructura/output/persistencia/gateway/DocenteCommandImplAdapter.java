@@ -36,10 +36,5 @@ public class DocenteCommandImplAdapter implements IDocenteCommandRepositoryPort 
         throw new UnsupportedOperationException("Unimplemented method 'cambiarEstadoDocente'");
     }
 
-    @Override
-    public boolean existeDocentePorCorreo(String correo) {
-        DocenteEntity docenteEntity = docenteRepositorio.findByCorreo(correo);
-        return docenteEntity != null;
-    }
     
 }
