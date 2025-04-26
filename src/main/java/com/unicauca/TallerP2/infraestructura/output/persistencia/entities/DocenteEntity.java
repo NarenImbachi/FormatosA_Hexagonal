@@ -2,6 +2,8 @@ package com.unicauca.TallerP2.infraestructura.output.persistencia.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -41,6 +43,7 @@ public class DocenteEntity {
     private List<ObservacionEntity> objObservacion;
 
     @OneToMany( mappedBy = "objDocente", fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<FormatoAEntity> objFormatoA;
 
     @OneToMany( mappedBy = "objDocente")

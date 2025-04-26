@@ -10,6 +10,9 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class DocentePeticionDTO {
+
+    private Integer id;
+
     private String nombre;
 
     private String apellido;

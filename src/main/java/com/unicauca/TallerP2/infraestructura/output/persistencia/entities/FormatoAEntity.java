@@ -46,7 +46,7 @@ public class FormatoAEntity {
     @OneToMany(mappedBy = "objFormato", fetch = FetchType.LAZY)
     private List<EvaluacionEntity> evaluacion;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "idDocente", nullable = false)
     private DocenteEntity objDocente;
 }
