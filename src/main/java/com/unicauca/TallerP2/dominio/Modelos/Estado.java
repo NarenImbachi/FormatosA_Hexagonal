@@ -20,4 +20,6 @@ public class Estado {
     private Date fechaRegistro;
 
     private FormatoA objFormato;
+
+    
 }
