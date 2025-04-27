@@ -19,6 +19,8 @@ public class Historico {
     
     private Date fechaInicio;
 
+    private Date fechaFin;
+
     private Docente objDocente;
 
     private Rol objRol;

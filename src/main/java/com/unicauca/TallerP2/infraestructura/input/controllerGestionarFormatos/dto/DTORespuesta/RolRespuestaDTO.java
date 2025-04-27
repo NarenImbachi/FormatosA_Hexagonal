@@ -7,12 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class DocenteRespuestaDTO {
-    private String nombre;
-
-    private String apellido;
-
-    private String correo;
-
-    private String nombreGrupo;
+public class RolRespuestaDTO {
+    private String rol_asignado;
 }

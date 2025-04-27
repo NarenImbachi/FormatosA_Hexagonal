@@ -14,6 +14,7 @@ import com.unicauca.TallerP2.aplicacion.input.IDocenteQueryInputPort;
 import com.unicauca.TallerP2.dominio.Modelos.Docente;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.RespuestaDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTOPeticion.DocentePeticionDTO;
+import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.DocenteComiteRespuestaDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.DocenteRespuestaDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.mappers.IDocenteRestMapper;
 
@@ -44,13 +45,23 @@ public class ControladorDocente {
     @GetMapping("/consultar")
     public ResponseEntity<RespuestaDTO<List<DocenteRespuestaDTO> >> consultarDocentes() {
         List<Docente> listaDocentes = docenteQueryInputPort.listarDocentes();
-        List<DocenteRespuestaDTO> listaDocentesDTO = listaDocentes.stream()
-                .map(docenteRestMapper::toDTO)
-                .toList();
+        List<DocenteRespuestaDTO> listaDocentesDTO = docenteRestMapper.toDTOList(listaDocentes);
         var respuesta = RespuestaDTO.<List<DocenteRespuestaDTO>>builder()
                 .data(listaDocentesDTO)
                 .status(200)
                 .message("Lista de docentes")
+                .build();
+        return respuesta.of();
+    }
+
+    @GetMapping("/consultarMiembrosComite")
+    public ResponseEntity<RespuestaDTO<List<DocenteComiteRespuestaDTO> >> consultarMiembrosComite() {
+        List<Docente> listaMiembrosComite = docenteQueryInputPort.listarMiembrosComite();
+        List<DocenteComiteRespuestaDTO> listaMiembrosComiteDTO = docenteRestMapper.toDTOListComite(listaMiembrosComite);
+        var respuesta = RespuestaDTO.<List<DocenteComiteRespuestaDTO>>builder()
+                .data(listaMiembrosComiteDTO)
+                .status(200)
+                .message("Lista de miembros del comite")
                 .build();
         return respuesta.of();
     }

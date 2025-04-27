@@ -27,5 +27,14 @@ public class DocenteQueryAdapter implements IDocenteQueryInputPort {
         }
         return listaDocentes;
     }
+
+    @Override
+    public List<Docente> listarMiembrosComite() {
+        List<Docente> listaMiembrosComite = docenteQueryRepositoryPort.listarMiembrosComite();
+        if (listaMiembrosComite.isEmpty()) {
+            this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay docentes registrados en la base de datos");
+        }
+        return listaMiembrosComite;
+    }
     
 }

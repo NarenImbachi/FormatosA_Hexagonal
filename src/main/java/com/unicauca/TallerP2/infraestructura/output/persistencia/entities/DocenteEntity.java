@@ -2,8 +2,6 @@ package com.unicauca.TallerP2.infraestructura.output.persistencia.entities;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -39,14 +37,13 @@ public class DocenteEntity {
     @Column(nullable = false, length = 50, unique = true)
     private String nombreGrupo;
 
-    @ManyToMany(mappedBy = "objDocente", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "objDocente", fetch = FetchType.LAZY)
     private List<ObservacionEntity> objObservacion;
 
-    @OneToMany( mappedBy = "objDocente", fetch = FetchType.EAGER)
-    @JsonIgnore
+    @OneToMany( mappedBy = "objDocente", fetch = FetchType.LAZY)
     private List<FormatoAEntity> objFormatoA;
 
-    @OneToMany( mappedBy = "objDocente")
+    @OneToMany( mappedBy = "objDocente", fetch = FetchType.EAGER)
     private List<HistoricoEntity> objHistorico;
 
 }

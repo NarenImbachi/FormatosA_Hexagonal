@@ -1,5 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,12 +9,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class DocenteRespuestaDTO {
-    private String nombre;
-
-    private String apellido;
-
-    private String correo;
-
-    private String nombreGrupo;
+public class HistoricoRespuestaDTO {
+    private Date fechaInicio;
+    private Date fechaFin;
+    private RolRespuestaDTO objRol;
 }

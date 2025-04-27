@@ -42,5 +42,14 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
         DocenteEntity docenteEntity = docenteRepositorio.findByCorreo(correo);
         return docenteEntity != null;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Docente> listarMiembrosComite() {
+        List<DocenteEntity> listaMiembrosComite = docenteRepositorio.findAll();
+        return listaMiembrosComite.stream()
+                .map(docenteEntityMapper::toDomainLazyrole)
+                .toList();
+    }
     
 }
