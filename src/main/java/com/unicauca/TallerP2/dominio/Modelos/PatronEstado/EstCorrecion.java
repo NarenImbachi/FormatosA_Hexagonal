@@ -2,6 +2,7 @@ package com.unicauca.TallerP2.dominio.Modelos.PatronEstado;
 
 import com.unicauca.TallerP2.aplicacion.output.IFormatoCommandRepositoryPort;
 
+
 public class EstCorrecion implements IntEstado{
 
     IFormatoCommandRepositoryPort formatoCommandRepositoryPort;

@@ -1,10 +1,13 @@
 package com.unicauca.TallerP2.dominio.Modelos.PatronEstado;
 
+import org.springframework.stereotype.Service;
+
 import com.unicauca.TallerP2.aplicacion.output.IFormatoCommandRepositoryPort;
 
+@Service
 public class EstEvaluacion implements IntEstado{
 
-    IFormatoCommandRepositoryPort formatoCommandRepositoryPort;
+    private IFormatoCommandRepositoryPort formatoCommandRepositoryPort;
 
     public EstEvaluacion(IFormatoCommandRepositoryPort formatoCommandRepositoryPort) {
         this.formatoCommandRepositoryPort = formatoCommandRepositoryPort;

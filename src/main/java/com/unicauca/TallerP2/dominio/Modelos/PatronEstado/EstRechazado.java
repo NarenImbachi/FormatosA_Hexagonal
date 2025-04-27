@@ -1,5 +1,6 @@
 package com.unicauca.TallerP2.dominio.Modelos.PatronEstado;
 
+
 public class EstRechazado implements IntEstado{
 
     @Override

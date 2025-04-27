@@ -4,8 +4,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import com.unicauca.TallerP2.aplicacion.input.IEstadoInputPort;
 import com.unicauca.TallerP2.aplicacion.input.IFormatoCommandInputPort;
 import com.unicauca.TallerP2.aplicacion.input.IFormatoQueryInputPort;
 import com.unicauca.TallerP2.dominio.Modelos.FormatoA;
@@ -23,6 +27,7 @@ public class ControladorFormato {
 
     private final IFormatoCommandInputPort formatoCommandInputPort;
     private final IFormatoQueryInputPort formatoQueryInputPort;
+    private final IEstadoInputPort estadoInputPort;
     private final IFormatoRestMapper formatoRestMapper;
 
     @PostMapping("/crear")
@@ -36,5 +41,15 @@ public class ControladorFormato {
                 .build();
         return respuesta.of();
     }
-    
+
+    @PutMapping("/cambiarEstado/{estado}/{idFormato}")
+    public ResponseEntity<RespuestaDTO<String>> cambiarEstado(@PathVariable Integer idFormato, @PathVariable String estado) {
+        String mensaje = estadoInputPort.cambiarEstado(idFormato, estado);
+        var respuesta = RespuestaDTO.<String>builder()
+                .data(mensaje)
+                .status(200)
+                .message("Estado cambiado exitosamente")
+                .build();
+        return respuesta.of();
+    }
 }

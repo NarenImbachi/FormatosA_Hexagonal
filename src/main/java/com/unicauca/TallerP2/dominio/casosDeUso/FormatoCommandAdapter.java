@@ -61,8 +61,7 @@ public class FormatoCommandAdapter implements IFormatoCommandInputPort {
 
     @Override
     public String cambiarEstado(Integer idFormato, String estado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstado'");
+        return formatoCommandRepositoryPort.cambiarEstado(idFormato, estado);
     }
     
 }

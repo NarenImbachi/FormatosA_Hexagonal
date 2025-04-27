@@ -1,6 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.output.persistencia.gateway;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -29,13 +30,15 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
 
     @Override
     public FormatoA buscarFormatoPorId(Integer idFormato) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarFormatoPorId'");
+        Optional<FormatoAEntity> formatoEntity = formatoRepositorio.findById(idFormato);
+        return formatoEntity.map(formatoEntityMapper::toDomain).orElse(null);
     }
 
     @Override
     public boolean existeFormatoPorTitulo(String titulo) {
         return formatoRepositorio.existsByTitulo(titulo);
     }
+
+
     
 }
