@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.unicauca.TallerP2.aplicacion.output.IFormatoQueryRepository;
 import com.unicauca.TallerP2.dominio.Modelos.FormatoA;
@@ -22,6 +23,7 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
     private final IFormatoEntityMapper formatoEntityMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public List<FormatoA> listarFormatosPorDocente(Integer idDocente) {
        
         throw new UnsupportedOperationException("Unimplemented method 'buscarFormatoPorId'");
@@ -29,12 +31,14 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public FormatoA buscarFormatoPorId(Integer idFormato) {
         Optional<FormatoAEntity> formatoEntity = formatoRepositorio.findById(idFormato);
         return formatoEntity.map(formatoEntityMapper::toDomain).orElse(null);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existeFormatoPorTitulo(String titulo) {
         return formatoRepositorio.existsByTitulo(titulo);
     }

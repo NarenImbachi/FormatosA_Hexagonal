@@ -7,11 +7,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.unicauca.TallerP2.aplicacion.output.IFormatoCommandRepositoryPort;
 import com.unicauca.TallerP2.dominio.Modelos.FormatoA;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.DocenteEntity;
-import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.EstadoEntity;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.FormatoAEntity;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IFormatoEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.repositoros.IDocenteRepositorio;
-import com.unicauca.TallerP2.infraestructura.output.persistencia.repositoros.IEstadoRepositorio;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.repositoros.IFormatoRepositorio;
 
 import lombok.RequiredArgsConstructor;
@@ -23,7 +21,6 @@ public class FormatoCommandImplAdapter implements IFormatoCommandRepositoryPort 
     private final IFormatoRepositorio formatoRepositorio;
     private final IFormatoEntityMapper formatoEntityMapper;
     private final IDocenteRepositorio docenteRepositorio;
-    private final IEstadoRepositorio estadoRepositorio;
 
     @Override
     @Transactional
@@ -45,12 +42,14 @@ public class FormatoCommandImplAdapter implements IFormatoCommandRepositoryPort 
     }
 
     @Override
+    @Transactional
     public FormatoA modificarFormato(FormatoA formato) {
         FormatoAEntity formatoModificado = formatoRepositorio.save(formatoEntityMapper.toEntity(formato));
         return formatoEntityMapper.toDomain(formatoModificado);
     }
 
     @Override
+    @Transactional
     public String cambiarEstado(Integer idFormato, String estado) {
         FormatoAEntity formato = formatoRepositorio.findById(idFormato).orElse(null);
         if (formato == null) {

@@ -3,6 +3,7 @@ package com.unicauca.TallerP2.infraestructura.output.persistencia.gateway;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.unicauca.TallerP2.aplicacion.output.IDocenteQueryRepositoryPort;
 import com.unicauca.TallerP2.dominio.Modelos.Docente;
@@ -21,6 +22,7 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
     private final IDocenteEntityMapper docenteEntityMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Docente> listarDocentes() {
         List<DocenteEntity> listaDocentes = docenteRepositorio.findAll();
         return listaDocentes.stream()
@@ -29,11 +31,13 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existeDocente(Integer idDocente) {
         return docenteRepositorio.existsById(idDocente);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public boolean existeDocentePorCorreo(String correo) {
         DocenteEntity docenteEntity = docenteRepositorio.findByCorreo(correo);
         return docenteEntity != null;
