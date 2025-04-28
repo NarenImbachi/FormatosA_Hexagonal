@@ -16,7 +16,7 @@ public class FormatoEagerResponseDTO {
 
     private String titulo;
     
-    private String objetivosEspecificos;
+    private List<String> objetivosEspecificos;
 
     private EstadoRespuestaDTO estado;
 

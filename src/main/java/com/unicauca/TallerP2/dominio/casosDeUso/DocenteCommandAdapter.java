@@ -37,11 +37,4 @@ public class DocenteCommandAdapter implements IDocenteCommandInputPort {
         
         return this.docenteCommandRepositoryPort.modificarDocente(docente);
     }
-
-    @Override
-    public String cambiarEstadoDocente(int idDocente) {
-        if(this.docenteQueryRepositoryPort.existeDocente(idDocente))
-            this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, el docente no existe en la base de datos");
-        return "El estado del docente ha sido cambiado correctamente";
-    }
 }

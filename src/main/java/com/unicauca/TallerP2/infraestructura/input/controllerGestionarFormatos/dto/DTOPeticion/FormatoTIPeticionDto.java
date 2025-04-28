@@ -1,5 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTOPeticion;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +14,7 @@ public class FormatoTIPeticionDto extends FormatoPeticionDTO {
     
     private String rutaCA;
 
-    public FormatoTIPeticionDto(String objetivoGeneral, String titulo, String objetivosEspecificos,
+    public FormatoTIPeticionDto(String objetivoGeneral, String titulo, List<String> objetivosEspecificos,
             String nombreAsesor, String nombreEstudiante1, String rutaCA, DocentePeticionDTO docente) {
         super(objetivoGeneral, titulo, objetivosEspecificos, docente);
         this.nombreAsesor = nombreAsesor;

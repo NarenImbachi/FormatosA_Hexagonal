@@ -18,7 +18,7 @@ public class FormatoA {
 
     private String titulo;
     
-    private String objetivosEspecificos;
+    private List<String> objetivosEspecificos;
 
     private Estado estado;
 

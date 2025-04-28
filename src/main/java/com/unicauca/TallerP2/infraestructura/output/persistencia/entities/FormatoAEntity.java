@@ -38,7 +38,7 @@ public class FormatoAEntity {
     private String titulo;
     
     @Column(nullable = false)
-    private String objetivosEspecificos;
+    private List<String> objetivosEspecificos;
 
     @OneToOne(mappedBy = "objFormato", cascade = {CascadeType.PERSIST}, optional = false)
     private EstadoEntity estado;

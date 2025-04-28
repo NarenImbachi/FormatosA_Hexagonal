@@ -1,5 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta;
 
+import java.util.List;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +14,7 @@ public class FormatoPPRespuestaDto extends  FormatoRespuestaDTO{
     private String nombreEstudiante2;
 
     
-    public FormatoPPRespuestaDto(String objetivoGeneral, String titulo, String objetivosEspecificos,
+    public FormatoPPRespuestaDto(String objetivoGeneral, String titulo, List<String> objetivosEspecificos,
             EstadoRespuestaDTO estado, DocenteRespuestaDTO objDocente,String nombreEstudiante1, String nombreEstudiante2) {
         super(objetivoGeneral, titulo, objetivosEspecificos, estado, objDocente);
 

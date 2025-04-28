@@ -29,16 +29,8 @@ public class DocenteCommandImplAdapter implements IDocenteCommandRepositoryPort 
     @Override
     @Transactional
     public Docente modificarDocente(Docente docente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'modificarDocente'");
+        DocenteEntity docenteModificado = docenteRepositorio.save(docenteEntityMapper.toEntity(docente));
+        return docenteEntityMapper.toDomain(docenteModificado);
     }
-
-    @Override
-    @Transactional
-    public String cambiarEstadoDocente(int idDocente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cambiarEstadoDocente'");
-    }
-
     
 }

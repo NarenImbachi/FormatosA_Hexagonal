@@ -1,6 +1,8 @@
 package com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta;
 
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,7 +16,7 @@ public class FormatoRespuestaDTO {
 
     private String titulo;
     
-    private String objetivosEspecificos;
+    private List<String> objetivosEspecificos;
 
     private EstadoRespuestaDTO estado;
 
