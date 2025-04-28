@@ -1,6 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.output.persistencia.gateway;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.unicauca.TallerP2.aplicacion.output.IDocenteQueryRepositoryPort;
 import com.unicauca.TallerP2.dominio.Modelos.Docente;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.DocenteEntity;
+import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IDocenteEagerEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IDocenteEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.repositoros.IDocenteRepositorio;
 
@@ -21,10 +23,12 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
 
     private final IDocenteEntityMapper docenteEntityMapper;
 
+    private final IDocenteEagerEntityMapper docenteEagerEntityMapper;
+
     @Override
     @Transactional(readOnly = true)
-    public List<Docente> listarDocentes() {
-        List<DocenteEntity> listaDocentes = docenteRepositorio.findAll();
+    public List<Docente> listarDocentes(String nombreGrupo, String patronApellido) {
+        List<DocenteEntity> listaDocentes = docenteRepositorio.findByNombreGrupoAndApellidoStartingWithIgnoreCaseOrderByApellidoAsc(nombreGrupo, patronApellido);
         return listaDocentes.stream()
                 .map(docenteEntityMapper::toDomain)
                 .toList();
@@ -39,8 +43,7 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
     @Override
     @Transactional(readOnly = true)
     public boolean existeDocentePorCorreo(String correo) {
-        DocenteEntity docenteEntity = docenteRepositorio.findByCorreo(correo);
-        return docenteEntity != null;
+        return docenteRepositorio.existsByCorreo(correo);
     }
 
     @Override
@@ -50,6 +53,16 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
         return listaMiembrosComite.stream()
                 .map(docenteEntityMapper::toDomainLazyrole)
                 .toList();
+    }
+
+    @Override
+    public Docente formatosPorDocente(Integer idDocente) {
+        Optional<DocenteEntity> docenteEntity = docenteRepositorio.findById(idDocente);
+        if (docenteEntity.isPresent()) {
+            return docenteEagerEntityMapper.toDomain(docenteEntity.get());
+        } else {
+            return null;
+        }
     }
     
 }

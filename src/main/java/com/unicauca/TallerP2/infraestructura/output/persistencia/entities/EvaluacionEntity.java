@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,7 +36,7 @@ public class EvaluacionEntity {
     @Column(nullable = true)
     private String nombreCoordinador;
 
-    @OneToMany(mappedBy = "objEvaluacion")
+    @OneToMany(mappedBy = "objEvaluacion", fetch = FetchType.EAGER)
     private List<ObservacionEntity> observacion;
 
     @ManyToOne

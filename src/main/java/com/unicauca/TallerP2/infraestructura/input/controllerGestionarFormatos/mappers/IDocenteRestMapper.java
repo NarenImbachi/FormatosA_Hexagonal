@@ -9,6 +9,7 @@ import com.unicauca.TallerP2.dominio.Modelos.Docente;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTOPeticion.DocentePeticionDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.DocenteComiteRespuestaDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.DocenteRespuestaDTO;
+import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.FormatosDocenteResponseDTO;
 
 @Mapper(componentModel = "spring")
 public interface IDocenteRestMapper {
@@ -23,4 +24,6 @@ public interface IDocenteRestMapper {
     List<DocenteRespuestaDTO> toDTOList (List<Docente> docente);
 
     List<DocenteComiteRespuestaDTO> toDTOListComite (List<Docente> docentes);
+
+    FormatosDocenteResponseDTO toFormatosDocenteResponseDTO(Docente docente);
 }

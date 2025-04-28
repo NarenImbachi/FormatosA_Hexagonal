@@ -43,7 +43,7 @@ public class FormatoAEntity {
     @OneToOne(mappedBy = "objFormato", cascade = {CascadeType.PERSIST}, optional = false)
     private EstadoEntity estado;
 
-    @OneToMany(mappedBy = "objFormato", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "objFormato", fetch = FetchType.EAGER)
     private List<EvaluacionEntity> evaluacion;
 
     @ManyToOne(cascade = {CascadeType.PERSIST})

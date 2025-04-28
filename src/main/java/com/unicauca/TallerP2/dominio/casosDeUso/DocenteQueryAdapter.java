@@ -2,11 +2,11 @@ package com.unicauca.TallerP2.dominio.casosDeUso;
 
 import java.util.List;
 
-
 import com.unicauca.TallerP2.aplicacion.input.IDocenteQueryInputPort;
 import com.unicauca.TallerP2.aplicacion.output.IDocenteQueryRepositoryPort;
 import com.unicauca.TallerP2.aplicacion.output.IFormeadorResultadoOutputPort;
 import com.unicauca.TallerP2.dominio.Modelos.Docente;
+
 
 public class DocenteQueryAdapter implements IDocenteQueryInputPort {
 
@@ -20,8 +20,8 @@ public class DocenteQueryAdapter implements IDocenteQueryInputPort {
     }
 
     @Override
-    public List<Docente> listarDocentes() {
-        List<Docente> listaDocentes = docenteQueryRepositoryPort.listarDocentes();
+    public List<Docente> listarDocentes(String nombreGrupo, String patronApellido) {
+        List<Docente> listaDocentes = docenteQueryRepositoryPort.listarDocentes(nombreGrupo, patronApellido);
         if (listaDocentes.isEmpty()) {
             this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay docentes registrados en la base de datos");
         }
@@ -35,6 +35,15 @@ public class DocenteQueryAdapter implements IDocenteQueryInputPort {
             this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay docentes registrados en la base de datos");
         }
         return listaMiembrosComite;
+    }
+
+    @Override
+    public Docente formatosPorDocente(Integer idDocente) {
+        Docente docente = docenteQueryRepositoryPort.formatosPorDocente(idDocente);
+        if (docente == null) {
+            this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay docentes registrados en la base de datos");
+        }
+        return docente;
     }
     
 }

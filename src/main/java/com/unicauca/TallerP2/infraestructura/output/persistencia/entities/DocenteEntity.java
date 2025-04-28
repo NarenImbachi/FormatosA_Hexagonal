@@ -40,7 +40,7 @@ public class DocenteEntity {
     @ManyToMany(mappedBy = "objDocente", fetch = FetchType.LAZY)
     private List<ObservacionEntity> objObservacion;
 
-    @OneToMany( mappedBy = "objDocente", fetch = FetchType.LAZY)
+    @OneToMany( mappedBy = "objDocente", fetch = FetchType.EAGER)
     private List<FormatoAEntity> objFormatoA;
 
     @OneToMany( mappedBy = "objDocente", fetch = FetchType.EAGER)

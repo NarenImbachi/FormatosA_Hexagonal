@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.d
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTOPeticion.DocentePeticionDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.DocenteComiteRespuestaDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.DocenteRespuestaDTO;
+import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.FormatosDocenteResponseDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.mappers.IDocenteRestMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -42,9 +44,9 @@ public class ControladorDocente {
         return respuesta.of();
     }
 
-    @GetMapping("/consultar")
-    public ResponseEntity<RespuestaDTO<List<DocenteRespuestaDTO> >> consultarDocentes() {
-        List<Docente> listaDocentes = docenteQueryInputPort.listarDocentes();
+    @GetMapping("/consultar/{nombreGrupo}/{patronApellido}")
+    public ResponseEntity<RespuestaDTO<List<DocenteRespuestaDTO>>> consultarDocentes(@PathVariable String nombreGrupo, @PathVariable String patronApellido) {
+        List<Docente> listaDocentes = docenteQueryInputPort.listarDocentes(nombreGrupo, patronApellido);
         List<DocenteRespuestaDTO> listaDocentesDTO = docenteRestMapper.toDTOList(listaDocentes);
         var respuesta = RespuestaDTO.<List<DocenteRespuestaDTO>>builder()
                 .data(listaDocentesDTO)
@@ -62,6 +64,18 @@ public class ControladorDocente {
                 .data(listaMiembrosComiteDTO)
                 .status(200)
                 .message("Lista de miembros del comite")
+                .build();
+        return respuesta.of();
+    }
+
+    @GetMapping("/consultarFormatoPorDocente/{idDocente}")
+    public ResponseEntity<RespuestaDTO<FormatosDocenteResponseDTO>> consultarFormatoPorDocente(@PathVariable Integer idDocente) {
+        Docente docente = docenteQueryInputPort.formatosPorDocente(idDocente);
+        FormatosDocenteResponseDTO formatosDocenteResponseDTO = docenteRestMapper.toFormatosDocenteResponseDTO(docente);
+        var respuesta = RespuestaDTO.<FormatosDocenteResponseDTO>builder()
+                .data(formatosDocenteResponseDTO)
+                .status(200)
+                .message("Formato del docente")
                 .build();
         return respuesta.of();
     }

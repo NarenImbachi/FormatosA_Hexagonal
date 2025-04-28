@@ -12,5 +12,4 @@ public interface IFormatoRepositorio extends JpaRepository<FormatoAEntity, Integ
     Optional<FormatoAEntity> findById(Integer id);
     boolean existsByTitulo(String titulo);
     boolean existsById(Integer id);
-
 }
