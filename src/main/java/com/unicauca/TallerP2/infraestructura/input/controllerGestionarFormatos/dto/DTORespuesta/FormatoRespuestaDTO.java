@@ -17,4 +17,6 @@ public class FormatoRespuestaDTO {
     private String objetivosEspecificos;
 
     private EstadoRespuestaDTO estado;
+
+    private DocenteRespuestaDTO objDocente;
 }

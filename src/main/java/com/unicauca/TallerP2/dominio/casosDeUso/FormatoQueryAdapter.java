@@ -1,5 +1,6 @@
 package com.unicauca.TallerP2.dominio.casosDeUso;
 
+import java.util.Date;
 import java.util.List;
 
 import com.unicauca.TallerP2.aplicacion.input.IFormatoQueryInputPort;
@@ -19,15 +20,18 @@ public class FormatoQueryAdapter implements IFormatoQueryInputPort {
     }
 
     @Override
-    public List<FormatoA> listarFormatosPorDocente(Integer idDocente) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarFormatosPorDocente'");
-    }
-
-    @Override
     public FormatoA buscarFormatoPorId(Integer idFormato) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'buscarFormatoPorId'");
+    }
+
+    @Override
+    public FormatoA buscarFormatoPorTituloFechaInicioFin(String titulo, Date fechaInicio, Date fechaFin) {
+        FormatoA formato = formatoQueryRepository.buscarFormatoPorTituloFechaInicioFin(titulo, fechaInicio, fechaFin);
+        if (formato == null) {
+            this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay formatos registrados en la base de datos");
+        }
+        return formato;
     }
     
 }

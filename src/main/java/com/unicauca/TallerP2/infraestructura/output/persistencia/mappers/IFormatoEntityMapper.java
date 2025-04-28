@@ -20,7 +20,9 @@ public interface IFormatoEntityMapper {
 
     @SubclassMapping(source = FormatoPPAEntity.class, target = FormatoPPA.class)
     @SubclassMapping(source = FormatoTIAEntity.class, target = FormatoTIA.class)
-    @Mapping(target = "objDocente", ignore = true)
+    @Mapping(target = "objDocente.objObservacion", ignore = true)
+    @Mapping(target = "objDocente.objFormatoA", ignore = true)
+    @Mapping(target = "objDocente.objHistorico", ignore = true)
     @Mapping(target = "estado.objFormato", ignore = true)
     FormatoA toDomain(FormatoAEntity formatoAEntity);
 

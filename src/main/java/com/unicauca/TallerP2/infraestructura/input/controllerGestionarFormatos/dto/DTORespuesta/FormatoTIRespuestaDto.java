@@ -13,8 +13,8 @@ public class FormatoTIRespuestaDto extends FormatoRespuestaDTO {
     private String rutaCA;
 
     public FormatoTIRespuestaDto(String objetivoGeneral, String titulo, String objetivosEspecificos,
-            EstadoRespuestaDTO estado, String nombreAsesor, String nombreEstudiante1, String rutaCA) {
-        super(objetivoGeneral, titulo, objetivosEspecificos, estado);
+            EstadoRespuestaDTO estado,  DocenteRespuestaDTO objDocente, String nombreAsesor, String nombreEstudiante1, String rutaCA) {
+        super(objetivoGeneral, titulo, objetivosEspecificos, estado, objDocente);
         this.nombreAsesor = nombreAsesor;
         this.nombreEstudiante1 = nombreEstudiante1;
         this.rutaCA = rutaCA;

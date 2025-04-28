@@ -1,5 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.output.persistencia.gateway;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,14 +26,6 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
 
     @Override
     @Transactional(readOnly = true)
-    public List<FormatoA> listarFormatosPorDocente(Integer idDocente) {
-       
-        throw new UnsupportedOperationException("Unimplemented method 'buscarFormatoPorId'");
-        
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public FormatoA buscarFormatoPorId(Integer idFormato) {
         Optional<FormatoAEntity> formatoEntity = formatoRepositorio.findById(idFormato);
         return formatoEntity.map(formatoEntityMapper::toDomain).orElse(null);
@@ -41,6 +35,15 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
     @Transactional(readOnly = true)
     public boolean existeFormatoPorTitulo(String titulo) {
         return formatoRepositorio.existsByTitulo(titulo);
+    }
+
+    @Override
+    public FormatoA buscarFormatoPorTituloFechaInicioFin(String titulo, Date fechaInicio, Date fechaFin) {
+        FormatoAEntity formatoEntity = formatoRepositorio.findByTituloAndFechaInicioAndFechaFin(titulo, fechaInicio, fechaFin);
+        if (formatoEntity == null) {
+            return null;
+        }
+        return formatoEntityMapper.toDomain(formatoEntity);
     }
 
 

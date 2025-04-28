@@ -1,7 +1,12 @@
 package com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.controladores;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,4 +57,21 @@ public class ControladorFormato {
                 .build();
         return respuesta.of();
     }
+
+    @GetMapping("/consultarFormato")
+    public ResponseEntity<RespuestaDTO<FormatoRespuestaDTO>> consultarFormato(
+            @RequestParam String titulo,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaInicio,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaFin) 
+    {
+        FormatoA formato = formatoQueryInputPort.buscarFormatoPorTituloFechaInicioFin(titulo, fechaInicio, fechaFin);
+        FormatoRespuestaDTO formatoRespuestaDTO = formatoRestMapper.toDTO(formato);
+        var respuesta = RespuestaDTO.<FormatoRespuestaDTO>builder()
+                .data(formatoRespuestaDTO)
+                .status(200)
+                .message("Formato encontrado exitosamente")
+                .build();
+        return respuesta.of();
+    }
+    
 }
