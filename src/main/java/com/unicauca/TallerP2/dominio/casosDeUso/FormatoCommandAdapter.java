@@ -29,7 +29,7 @@ public class FormatoCommandAdapter implements IFormatoCommandInputPort {
         }
     
         Estado estado = new Estado();
-        estado.setEstadoActual("Formulado");
+        estado.setEstadoActual("formulado");
         estado.setFechaRegistro(new java.util.Date());
 
         formatoA.setEstado(estado);

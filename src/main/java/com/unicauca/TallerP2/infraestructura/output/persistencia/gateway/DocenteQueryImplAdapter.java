@@ -29,9 +29,7 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
     @Transactional(readOnly = true)
     public List<Docente> listarDocentes(String nombreGrupo, String patronApellido) {
         List<DocenteEntity> listaDocentes = docenteRepositorio.findByNombreGrupoAndApellidoStartingWithIgnoreCaseOrderByApellidoAsc(nombreGrupo, patronApellido);
-        return listaDocentes.stream()
-                .map(docenteEntityMapper::toDomain)
-                .toList();
+        return docenteEntityMapper.toDomainList(listaDocentes);
     }
 
     @Override
@@ -50,9 +48,7 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
     @Transactional(readOnly = true)
     public List<Docente> listarMiembrosComite() {
         List<DocenteEntity> listaMiembrosComite = docenteRepositorio.findAll();
-        return listaMiembrosComite.stream()
-                .map(docenteEntityMapper::toDomainLazyrole)
-                .toList();
+        return docenteEntityMapper.toDomainList(listaMiembrosComite);
     }
 
     @Override
