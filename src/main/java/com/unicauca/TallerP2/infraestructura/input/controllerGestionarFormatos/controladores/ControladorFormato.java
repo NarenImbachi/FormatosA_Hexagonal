@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -59,14 +60,14 @@ public class ControladorFormato {
     }
 
     @GetMapping("/consultarFormato")
-    public ResponseEntity<RespuestaDTO<FormatoRespuestaDTO>> consultarFormato(
-            @RequestParam String titulo,
+    public ResponseEntity<RespuestaDTO<List<FormatoRespuestaDTO>>> consultarFormato(
+            @RequestParam String correo,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaInicio,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaFin) 
     {
-        FormatoA formato = formatoQueryInputPort.buscarFormatoPorTituloFechaInicioFin(titulo, fechaInicio, fechaFin);
-        FormatoRespuestaDTO formatoRespuestaDTO = formatoRestMapper.toDTO(formato);
-        var respuesta = RespuestaDTO.<FormatoRespuestaDTO>builder()
+        List<FormatoA> formato = formatoQueryInputPort.buscarFormatoPorCorreoFechaInicioFin(correo, fechaInicio, fechaFin);
+        List<FormatoRespuestaDTO> formatoRespuestaDTO = formatoRestMapper.toDTOList(formato);
+        var respuesta = RespuestaDTO.<List<FormatoRespuestaDTO>>builder()
                 .data(formatoRespuestaDTO)
                 .status(200)
                 .message("Formato encontrado exitosamente")

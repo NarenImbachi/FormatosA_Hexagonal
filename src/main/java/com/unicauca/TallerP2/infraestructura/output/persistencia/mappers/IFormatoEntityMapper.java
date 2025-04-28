@@ -1,5 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.output.persistencia.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.SubclassMapping;
@@ -25,5 +27,7 @@ public interface IFormatoEntityMapper {
     @Mapping(target = "objDocente.objHistorico", ignore = true)
     @Mapping(target = "estado.objFormato", ignore = true)
     FormatoA toDomain(FormatoAEntity formatoAEntity);
+
+    List<FormatoA> toDomainList(List<FormatoAEntity> formatoAEntityList);
 
 }

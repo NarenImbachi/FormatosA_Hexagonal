@@ -1,6 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.output.persistencia.repositoros;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,11 +18,11 @@ public interface IFormatoRepositorio extends JpaRepository<FormatoAEntity, Integ
     @Query("SELECT f FROM FormatoAEntity f " +
         "JOIN f.estado e " +
         "JOIN f.objDocente d " +
-        "WHERE f.titulo = :titulo " +
+        "WHERE d.correo = :correo " +
         "AND e.fechaRegistro >= :fechaInicio " +
         "AND e.fechaRegistro <= :fechaFin")
-    FormatoAEntity findByTituloAndFechaInicioAndFechaFin(
-        @Param("titulo") String titulo,
+    List<FormatoAEntity> findByTituloAndFechaInicioAndFechaFin(
+        @Param("correo") String correo,
         @Param("fechaInicio") Date fechaInicio,
         @Param("fechaFin") Date fechaFin
     );

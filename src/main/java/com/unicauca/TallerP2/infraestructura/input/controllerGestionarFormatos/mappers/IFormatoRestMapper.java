@@ -1,5 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.mappers;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.SubclassMapping;
@@ -27,4 +29,6 @@ public interface IFormatoRestMapper {
     @SubclassMapping(source = FormatoPPA.class, target = FormatoPPRespuestaDto.class)
     @SubclassMapping(source = FormatoTIA.class, target = FormatoTIRespuestaDto.class)
     FormatoRespuestaDTO toDTO(FormatoA formatoA);
+
+    List<FormatoRespuestaDTO> toDTOList(List<FormatoA> formatoAList);
 }

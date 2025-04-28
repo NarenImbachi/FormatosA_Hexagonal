@@ -1,6 +1,5 @@
 package com.unicauca.TallerP2.infraestructura.output.persistencia.gateway;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -38,12 +37,12 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
     }
 
     @Override
-    public FormatoA buscarFormatoPorTituloFechaInicioFin(String titulo, Date fechaInicio, Date fechaFin) {
-        FormatoAEntity formatoEntity = formatoRepositorio.findByTituloAndFechaInicioAndFechaFin(titulo, fechaInicio, fechaFin);
+    public List<FormatoA> buscarFormatoPorCorreoFechaInicioFin(String correo, Date fechaInicio, Date fechaFin) {
+        List<FormatoAEntity> formatoEntity = formatoRepositorio.findByTituloAndFechaInicioAndFechaFin(correo, fechaInicio, fechaFin);
         if (formatoEntity == null) {
             return null;
         }
-        return formatoEntityMapper.toDomain(formatoEntity);
+        return formatoEntityMapper.toDomainList(formatoEntity);
     }
 
 

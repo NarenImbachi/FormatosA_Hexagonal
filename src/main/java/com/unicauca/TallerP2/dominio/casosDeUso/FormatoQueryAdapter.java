@@ -26,8 +26,8 @@ public class FormatoQueryAdapter implements IFormatoQueryInputPort {
     }
 
     @Override
-    public FormatoA buscarFormatoPorTituloFechaInicioFin(String titulo, Date fechaInicio, Date fechaFin) {
-        FormatoA formato = formatoQueryRepository.buscarFormatoPorTituloFechaInicioFin(titulo, fechaInicio, fechaFin);
+    public List<FormatoA> buscarFormatoPorCorreoFechaInicioFin(String correo, Date fechaInicio, Date fechaFin) {
+        List<FormatoA> formato = formatoQueryRepository.buscarFormatoPorCorreoFechaInicioFin(correo, fechaInicio, fechaFin);
         if (formato == null) {
             this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay formatos registrados en la base de datos");
         }
