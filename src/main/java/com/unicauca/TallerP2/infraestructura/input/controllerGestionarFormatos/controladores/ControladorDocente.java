@@ -3,6 +3,7 @@ package com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,11 +21,14 @@ import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.d
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.FormatosDocenteResponseDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.mappers.IDocenteRestMapper;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/docente")
 @RequiredArgsConstructor
+@Validated
 public class ControladorDocente {
     
     private final IDocenteCommandInputPort docenteCommandInputPort;
@@ -33,7 +37,7 @@ public class ControladorDocente {
     private final IDocenteRestMapper docenteRestMapper;
 
     @PostMapping("/crear")
-    public ResponseEntity<RespuestaDTO<DocenteRespuestaDTO>> crearDocente(@RequestBody DocentePeticionDTO docentePeticionDTO) {
+    public ResponseEntity<RespuestaDTO<DocenteRespuestaDTO>> crearDocente(@Valid @RequestBody DocentePeticionDTO docentePeticionDTO) {
         Docente docente = docenteRestMapper.toModel(docentePeticionDTO);
         DocenteRespuestaDTO docenteRespuestaDTO = docenteRestMapper.toDTO(docenteCommandInputPort.crearDocente(docente));
         var respuesta = RespuestaDTO.<DocenteRespuestaDTO>builder()
@@ -69,7 +73,9 @@ public class ControladorDocente {
     }
 
     @GetMapping("/consultarFormatoPorDocente/{idDocente}")
-    public ResponseEntity<RespuestaDTO<FormatosDocenteResponseDTO>> consultarFormatoPorDocente(@PathVariable Integer idDocente) {
+    public ResponseEntity<RespuestaDTO<FormatosDocenteResponseDTO>> consultarFormatoPorDocente(@PathVariable 
+            @Min(value = 1, message = "{docente.url.id}") Integer idDocente) {
+                
         Docente docente = docenteQueryInputPort.formatosPorDocente(idDocente);
         FormatosDocenteResponseDTO formatosDocenteResponseDTO = docenteRestMapper.toFormatosDocenteResponseDTO(docente);
         var respuesta = RespuestaDTO.<FormatosDocenteResponseDTO>builder()

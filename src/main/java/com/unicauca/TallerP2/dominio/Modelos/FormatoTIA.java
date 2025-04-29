@@ -10,6 +10,8 @@ public class FormatoTIA extends FormatoA {
     private String nombreAsesor;
 
     private String nombreEstudiante1;
+
+    private String codigoEstudiante1;
     
     private String rutaCA;
 
@@ -17,9 +19,10 @@ public class FormatoTIA extends FormatoA {
         super();
     }
 
-    public FormatoTIA(String nombreAsesor, String nombreEstudiante1, String rutaCA) {
+    public FormatoTIA(String nombreAsesor, String nombreEstudiante1, String codigoEstudiante1, String rutaCA) {
         this.nombreAsesor = nombreAsesor;
         this.nombreEstudiante1 = nombreEstudiante1;
+        this.codigoEstudiante1 = codigoEstudiante1;
         this.rutaCA = rutaCA;
     }
 }

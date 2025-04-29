@@ -16,6 +16,9 @@ public class FormatoTIAEntity extends FormatoAEntity {
 
     @Column(nullable = false, length = 100)
     private String nombreEstudiante1;
+
+    @Column(nullable = false, length = 12)
+    private String codigoEstudiante1;
     
     @Column(nullable = false, length = 100)
     private String rutaCA;
@@ -24,9 +27,10 @@ public class FormatoTIAEntity extends FormatoAEntity {
         super();
     }
 
-    public FormatoTIAEntity(String nombreAsesor, String nombreEstudiante1, String rutaCA) {
+    public FormatoTIAEntity(String nombreAsesor, String nombreEstudiante1,  String codigoEstudiante1, String rutaCA) {
         this.nombreAsesor = nombreAsesor;
         this.nombreEstudiante1 = nombreEstudiante1;
+        this.codigoEstudiante1 = codigoEstudiante1;
         this.rutaCA = rutaCA;
     }
 }

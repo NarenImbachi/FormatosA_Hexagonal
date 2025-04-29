@@ -14,6 +14,7 @@ import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.d
 @Mapper(componentModel = "spring")
 public interface IDocenteRestMapper {
 
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "objObservacion", ignore = true)
     @Mapping(target = "objFormatoA", ignore = true)
     @Mapping(target = "objHistorico", ignore = true)

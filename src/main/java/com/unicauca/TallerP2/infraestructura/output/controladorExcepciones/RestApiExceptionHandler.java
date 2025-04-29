@@ -9,12 +9,14 @@ import jakarta.validation.ConstraintViolationException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.fasterxml.jackson.databind.exc.InvalidTypeIdException;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.estructuraExcepciones.CodigoError;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.estructuraExcepciones.ErrorUtils;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.estructuraExcepciones.Error;
@@ -90,5 +92,30 @@ public class RestApiExceptionHandler {
         ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
                 return new ResponseEntity<>(e.getMessage(),
                                 HttpStatus.BAD_REQUEST);
+        }
+
+        @ExceptionHandler(InvalidTypeIdException.class)
+        public ResponseEntity<String> handleInvalidTypeIdException(InvalidTypeIdException ex) {
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("El campo 'tipoFormato' es obligatorio y debe tener un valor válido (por ejemplo, 'TI' o 'PP').");
+        }
+    
+
+        @ExceptionHandler(HttpMessageNotReadableException.class)
+        public ResponseEntity<Map<String, String>> handleHttpMessageNotReadableException(
+                        HttpMessageNotReadableException ex) {
+                String fullMessage = ex.getMessage();
+                String knownTypesInfo = "";
+                int start = fullMessage.indexOf("known type ids =");
+                if (start != -1) {
+                    knownTypesInfo = fullMessage.substring(start);
+                }
+
+                String customMessage = "El cuerpo de la solicitud no es legible: " + knownTypesInfo;
+
+                Map<String, String> errores = new HashMap<>();
+                errores.put("error", customMessage);
+                return new ResponseEntity<>(errores, HttpStatus.BAD_REQUEST);
         }
 }

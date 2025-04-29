@@ -24,6 +24,7 @@ import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.d
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.FormatoRespuestaDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.mappers.IFormatoRestMapper;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -37,7 +38,7 @@ public class ControladorFormato {
     private final IFormatoRestMapper formatoRestMapper;
 
     @PostMapping("/crear")
-    public ResponseEntity<RespuestaDTO<FormatoRespuestaDTO>> crearFormato(@RequestBody FormatoPeticionDTO formatoPeticionDTO) {
+    public ResponseEntity<RespuestaDTO<FormatoRespuestaDTO>> crearFormato(@Valid @RequestBody FormatoPeticionDTO formatoPeticionDTO) {
         FormatoA formato = formatoRestMapper.toModel(formatoPeticionDTO);
         FormatoRespuestaDTO formatoRespuestaDTO = formatoRestMapper.toDTO(formatoCommandInputPort.crearFormato(formato));
         var respuesta = RespuestaDTO.<FormatoRespuestaDTO>builder()

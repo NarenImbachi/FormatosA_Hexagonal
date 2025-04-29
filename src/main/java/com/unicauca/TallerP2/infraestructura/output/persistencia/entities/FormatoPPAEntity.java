@@ -13,16 +13,26 @@ import lombok.Setter;
 public class FormatoPPAEntity extends FormatoAEntity {
     @Column(nullable = false, length = 100)
     private String nombreEstudiante1;
+
+    @Column(nullable = false, length = 12)
+    private String codigoEstudiante1;
     
     @Column(nullable = false, length = 100)
     private String nombreEstudiante2;
+
+    @Column(nullable = false, length = 12)
+    private String codigoEstudiante2;
 
     public FormatoPPAEntity() {
         super();
     }
 
-    public FormatoPPAEntity(String nombreEstudiante1, String nombreEstudiante2) {
+    public FormatoPPAEntity(String nombreEstudiante1, String nombreEstudiante2,
+            String codigoEstudiante1, String codigoEstudiante2) {
         this.nombreEstudiante1 = nombreEstudiante1;
         this.nombreEstudiante2 = nombreEstudiante2;
+        this.codigoEstudiante1 = codigoEstudiante1;
+        this.codigoEstudiante2 = codigoEstudiante2;
     }
+    
 }
