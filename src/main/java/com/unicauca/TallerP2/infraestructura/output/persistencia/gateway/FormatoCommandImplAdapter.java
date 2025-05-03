@@ -31,7 +31,7 @@ public class FormatoCommandImplAdapter implements IFormatoCommandRepositoryPort 
 
         DocenteEntity docenteEntity;
         if(docenteRepositorio.existsByCorreo(formato.getObjDocente().getCorreo())) {
-            docenteEntity = docenteRepositorio.getReferenceById(formato.getObjDocente().getId());
+            docenteEntity = docenteRepositorio.getReferenceByCorreo(formato.getObjDocente().getCorreo());
             formatoEntity.setObjDocente(docenteEntity);
         }else{
             formatoEntity.getObjDocente().setId(null);

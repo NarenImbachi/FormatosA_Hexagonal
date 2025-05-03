@@ -26,4 +26,6 @@ public interface IDocenteRepositorio extends JpaRepository<DocenteEntity, Intege
     List<DocenteEntity> findByNombreGrupoAndApellidoStartingWithIgnoreCaseOrderByApellidoAsc(String nombreGrupo, String patronApellido);
 
     boolean existsById(Integer idDocente);
+
+    DocenteEntity getReferenceByCorreo(String correo);
 }
