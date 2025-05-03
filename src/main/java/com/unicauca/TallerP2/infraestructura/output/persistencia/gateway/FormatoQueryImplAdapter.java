@@ -8,8 +8,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.unicauca.TallerP2.aplicacion.output.IFormatoQueryRepository;
+import com.unicauca.TallerP2.dominio.Modelos.Evaluacion;
 import com.unicauca.TallerP2.dominio.Modelos.FormatoA;
+import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.EvaluacionEntity;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.FormatoAEntity;
+import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IEvaluacionEntityMapper;
+import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IEvaluacionObservacionEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IFormatoEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.repositoros.IFormatoRepositorio;
 
@@ -22,6 +26,8 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
     private final IFormatoRepositorio formatoRepositorio;
 
     private final IFormatoEntityMapper formatoEntityMapper;
+
+    private final IEvaluacionObservacionEntityMapper evaluacionObservacionEntityMapper;
 
     @Override
     @Transactional(readOnly = true)
@@ -45,6 +51,17 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
         return formatoEntityMapper.toDomainList(formatoEntity);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Evaluacion obtenerUltimaEvaluacion(Integer idFormatoA) {
+        Optional<EvaluacionEntity> ultimaEvaluacionEntity = formatoRepositorio.obtenerUltimaEvaluacionPorFormatoA(idFormatoA);
 
+        if(ultimaEvaluacionEntity.isPresent()) {
+            EvaluacionEntity evaluacionEntity = ultimaEvaluacionEntity.get();
+            return evaluacionObservacionEntityMapper.toDomain(evaluacionEntity);
+        }else{
+            return null;
+        }
+    }
     
 }

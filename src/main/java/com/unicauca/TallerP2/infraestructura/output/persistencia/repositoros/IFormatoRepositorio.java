@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.EvaluacionEntity;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.FormatoAEntity;
 
 public interface IFormatoRepositorio extends JpaRepository<FormatoAEntity, Integer> {
@@ -27,6 +28,7 @@ public interface IFormatoRepositorio extends JpaRepository<FormatoAEntity, Integ
         @Param("fechaFin") Date fechaFin
     );
 
-
+    @Query(value = "SELECT e FROM EvaluacionEntity e WHERE e.objFormato.id = :idFormatoA ORDER BY e.fechaRegistroConcepto DESC")
+    Optional<EvaluacionEntity> obtenerUltimaEvaluacionPorFormatoA(@Param("idFormatoA") Integer idFormatoA);
     
 }

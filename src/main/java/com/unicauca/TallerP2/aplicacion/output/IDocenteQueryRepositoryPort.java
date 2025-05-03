@@ -10,4 +10,5 @@ public interface IDocenteQueryRepositoryPort {
     public boolean existeDocentePorCorreo(String correo);
     public List<Docente> listarMiembrosComite();
     public Docente formatosPorDocente(Integer idDocente);
+    public List<Docente> listarDocentesPorIds(List<Integer> idsDocentes);
 }

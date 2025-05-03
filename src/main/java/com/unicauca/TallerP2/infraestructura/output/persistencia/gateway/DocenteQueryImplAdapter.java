@@ -60,5 +60,13 @@ public class DocenteQueryImplAdapter implements IDocenteQueryRepositoryPort {
             return null;
         }
     }
+
+    @Override
+    public List<Docente> listarDocentesPorIds(List<Integer> idsDocentes) {
+        List<DocenteEntity> listaDocentes = docenteRepositorio.findAllById(idsDocentes);
+        return listaDocentes.stream()
+                .map(docenteEntityMapper::toDomain)
+                .toList();
+    }
     
 }
