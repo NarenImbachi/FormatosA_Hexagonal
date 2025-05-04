@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unicauca.TallerP2.aplicacion.input.IDocenteCommandInputPort;
@@ -23,6 +24,7 @@ import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.m
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -37,10 +39,10 @@ public class ControladorDocente {
     private final IDocenteRestMapper docenteRestMapper;
 
     @PostMapping("/crear")
-    public ResponseEntity<RespuestaDTO<DocenteRespuestaDTO>> crearDocente(@Valid @RequestBody DocentePeticionDTO docentePeticionDTO) {
+    public ResponseEntity<RespuestaDTO<DocenteComiteRespuestaDTO>> crearDocente(@Valid @RequestBody DocentePeticionDTO docentePeticionDTO) {
         Docente docente = docenteRestMapper.toModel(docentePeticionDTO);
-        DocenteRespuestaDTO docenteRespuestaDTO = docenteRestMapper.toDTO(docenteCommandInputPort.crearDocente(docente));
-        var respuesta = RespuestaDTO.<DocenteRespuestaDTO>builder()
+        DocenteComiteRespuestaDTO docenteRespuestaDTO = docenteRestMapper.toDTOComite(docenteCommandInputPort.crearDocente(docente));
+        var respuesta = RespuestaDTO.<DocenteComiteRespuestaDTO>builder()
                 .data(docenteRespuestaDTO)
                 .status(201)
                 .message("Docente creado exitosamente")
@@ -48,8 +50,11 @@ public class ControladorDocente {
         return respuesta.of();
     }
 
-    @GetMapping("/consultar/{nombreGrupo}/{patronApellido}")
-    public ResponseEntity<RespuestaDTO<List<DocenteRespuestaDTO>>> consultarDocentes(@PathVariable String nombreGrupo, @PathVariable String patronApellido) {
+    @GetMapping("/consultar")
+    public ResponseEntity<RespuestaDTO<List<DocenteRespuestaDTO>>> consultarDocentes(
+        @RequestParam @Size(min = 1, max = 50, message = "{docente.nombreGrupo.size}") String nombreGrupo,
+        @RequestParam @Size(min = 1, max = 50, message = "{docente.apellido.size}") String patronApellido) {
+
         List<Docente> listaDocentes = docenteQueryInputPort.listarDocentes(nombreGrupo, patronApellido);
         List<DocenteRespuestaDTO> listaDocentesDTO = docenteRestMapper.toDTOList(listaDocentes);
         var respuesta = RespuestaDTO.<List<DocenteRespuestaDTO>>builder()

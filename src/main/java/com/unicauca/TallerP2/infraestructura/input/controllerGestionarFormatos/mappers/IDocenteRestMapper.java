@@ -17,7 +17,6 @@ public interface IDocenteRestMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "objObservacion", ignore = true)
     @Mapping(target = "objFormatoA", ignore = true)
-    @Mapping(target = "objHistorico", ignore = true)
     Docente toModel (DocentePeticionDTO docentePeticionDTO);
 
     DocenteRespuestaDTO toDTO (Docente docente);
@@ -27,4 +26,6 @@ public interface IDocenteRestMapper {
     List<DocenteComiteRespuestaDTO> toDTOListComite (List<Docente> docentes);
 
     FormatosDocenteResponseDTO toFormatosDocenteResponseDTO(Docente docente);
+
+    DocenteComiteRespuestaDTO toDTOComite (Docente docente);
 }

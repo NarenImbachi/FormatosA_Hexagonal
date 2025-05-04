@@ -18,6 +18,7 @@ public interface IFormatoEagerEntityMapper {
     @SubclassMapping(source = FormatoTIAEntity.class, target = FormatoTIA.class)
     @Mapping(target = "objDocente", ignore = true)
     @Mapping(target = "estado.objFormato", ignore = true)
+    //@Mapping(target = "evaluacion", ignore = true) // Lazzy
     FormatoA toDomain(FormatoAEntity formatoAEntity);
 
 }

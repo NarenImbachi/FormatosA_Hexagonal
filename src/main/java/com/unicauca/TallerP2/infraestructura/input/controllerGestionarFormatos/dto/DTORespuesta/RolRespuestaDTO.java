@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class RolRespuestaDTO {
-    private String rol_asignado;
+    private String nombre;
 }

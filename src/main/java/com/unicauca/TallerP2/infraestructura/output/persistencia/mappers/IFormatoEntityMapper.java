@@ -26,7 +26,6 @@ public interface IFormatoEntityMapper {
     @Mapping(target = "objDocente.objFormatoA", ignore = true)
     @Mapping(target = "objDocente.objHistorico", ignore = true)
     @Mapping(target = "estado.objFormato", ignore = true)
-    
     FormatoA toDomain(FormatoAEntity formatoAEntity);
 
     List<FormatoA> toDomainList(List<FormatoAEntity> formatoAEntityList);

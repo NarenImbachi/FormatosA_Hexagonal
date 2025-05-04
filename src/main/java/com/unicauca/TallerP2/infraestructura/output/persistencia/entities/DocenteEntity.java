@@ -2,6 +2,7 @@ package com.unicauca.TallerP2.infraestructura.output.persistencia.entities;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -43,7 +44,7 @@ public class DocenteEntity {
     @OneToMany( mappedBy = "objDocente", fetch = FetchType.EAGER)
     private List<FormatoAEntity> objFormatoA;
 
-    @OneToMany( mappedBy = "objDocente", fetch = FetchType.EAGER)
+    @OneToMany( mappedBy = "objDocente", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     private List<HistoricoEntity> objHistorico;
 
 }

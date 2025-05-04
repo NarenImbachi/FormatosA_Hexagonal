@@ -23,8 +23,8 @@ public class RolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Column(nullable = false, length = 100)
-    private String rol_asignado;
+    @Column(nullable = false, length = 100, unique = true)
+    private String nombre;
 
     @OneToMany(mappedBy = "objRol")
     private List<HistoricoEntity> objHistorico;

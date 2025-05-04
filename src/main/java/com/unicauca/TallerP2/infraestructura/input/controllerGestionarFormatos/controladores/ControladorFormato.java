@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,11 +27,14 @@ import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.d
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.mappers.IFormatoRestMapper;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/v1/formato")
 @RequiredArgsConstructor
+@Validated
 public class ControladorFormato {
 
     private final IFormatoCommandInputPort formatoCommandInputPort;
@@ -53,7 +57,8 @@ public class ControladorFormato {
     }
 
     @PutMapping("/cambiarEstado/{estado}/{idFormato}")
-    public ResponseEntity<RespuestaDTO<String>> cambiarEstado(@PathVariable Integer idFormato,
+    public ResponseEntity<RespuestaDTO<String>> cambiarEstado(
+            @PathVariable @Min(value = 1, message = "{formato.idFormato.min}") Integer idFormato,
             @PathVariable String estado) {
         String mensaje = estadoInputPort.cambiarEstado(idFormato, estado);
         var respuesta = RespuestaDTO.<String>builder()
@@ -66,7 +71,7 @@ public class ControladorFormato {
 
     @GetMapping("/consultarFormato")
     public ResponseEntity<RespuestaDTO<List<FormatoRespuestaDTO>>> consultarFormato(
-            @RequestParam String correo,
+            @RequestParam @Pattern(regexp = "^[A-Za-z0-9]+@unicauca\\.edu\\.co$", message = "{docente.correo.pattern}") String correo,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaInicio,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaFin) {
         List<FormatoA> formato = formatoQueryInputPort.buscarFormatoPorCorreoFechaInicioFin(correo, fechaInicio,

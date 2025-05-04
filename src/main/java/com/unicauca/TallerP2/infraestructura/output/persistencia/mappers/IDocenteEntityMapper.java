@@ -16,7 +16,6 @@ public interface IDocenteEntityMapper {
     @Named("toDomain")
     @Mapping(target = "objObservacion", ignore = true)
     @Mapping(target = "objFormatoA", ignore = true)
-    @Mapping(target = "objHistorico", ignore = true)
     Docente toDomain(DocenteEntity docenteEntity);
 
     DocenteEntity toEntity(Docente docente);

@@ -9,7 +9,8 @@ import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.Histor
 @Mapper(componentModel = "spring")
 public interface IHistoricoEntityMapper {
     
-    @Mapping(target = "objRol", ignore = true)
+    @Mapping(target = "objRol.objHistorico", ignore = true) // Eager
+    //@Mapping(target = "objRol", ignore = true) // Lazy
     @Mapping(target = "objDocente", ignore = true)
     Historico toDomain(HistoricoEntity historicoEntity);
     

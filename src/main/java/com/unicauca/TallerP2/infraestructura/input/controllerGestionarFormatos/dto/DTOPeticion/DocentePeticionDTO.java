@@ -1,5 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTOPeticion;
 
+import java.util.List;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -29,4 +31,6 @@ public class DocentePeticionDTO {
     @NotBlank(message = "{docente.nombreGrupo.notblank}")
     @Size(min = 1, max = 50, message = "{size.min.to.max}")
     private String nombreGrupo;
+
+    private List<HistoricoPeticionDTO> objHistorico;
 }

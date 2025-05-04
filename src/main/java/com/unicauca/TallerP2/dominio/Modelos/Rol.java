@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Rol {
     private Integer id;
     
-    private String rol_asignado;
+    private String nombre;
 
     private List<Historico> objHistorico;
 }

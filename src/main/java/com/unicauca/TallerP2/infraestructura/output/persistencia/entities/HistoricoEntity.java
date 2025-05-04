@@ -2,6 +2,7 @@ package com.unicauca.TallerP2.infraestructura.output.persistencia.entities;
 
 import java.util.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -38,7 +39,7 @@ public class HistoricoEntity {
     @JoinColumn( name =  "idDocente", referencedColumnName = "id" )
     private DocenteEntity objDocente;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinColumn( name =  "idRol", referencedColumnName = "id" )
     private RolEntity objRol;
 }
