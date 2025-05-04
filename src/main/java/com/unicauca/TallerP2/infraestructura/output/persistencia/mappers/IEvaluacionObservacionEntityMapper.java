@@ -6,11 +6,10 @@ import org.mapstruct.Mapping;
 import com.unicauca.TallerP2.dominio.Modelos.Evaluacion;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.EvaluacionEntity;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { IObservacionEntityMapper.class})
 public interface IEvaluacionObservacionEntityMapper {
-    @Mapping(target = "observacion", ignore = true)
+
     @Mapping(target = "objFormato", ignore = true)
-    @Mapping(target = "fechaRegistroConcepto", ignore = true)
     Evaluacion toDomain(EvaluacionEntity evaluacionEntity);
 
 

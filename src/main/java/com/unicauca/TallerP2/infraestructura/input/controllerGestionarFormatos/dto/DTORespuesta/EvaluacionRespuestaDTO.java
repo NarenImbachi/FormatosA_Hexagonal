@@ -19,6 +19,6 @@ public class EvaluacionRespuestaDTO {
 
     private String nombreCoordinador;
 
-    private List<ObservacionCommandRespuestaDTO> observacion;
+    private List<ObservacionesRespuestaDTO> observacion;
 
 }

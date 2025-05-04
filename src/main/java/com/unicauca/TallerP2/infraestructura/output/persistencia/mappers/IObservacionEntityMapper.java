@@ -6,10 +6,10 @@ import org.mapstruct.Mapping;
 import com.unicauca.TallerP2.dominio.Modelos.Observacion;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.ObservacionEntity;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { IDocenteEntityMapper.class})
 public interface IObservacionEntityMapper {
 
-    @Mapping(target = "objDocente", ignore = true)
+    @Mapping(target = "objEvaluacion", ignore = true)
     Observacion toDomain(ObservacionEntity observacionEntity);
       
     ObservacionEntity toEntity(Observacion observacion);

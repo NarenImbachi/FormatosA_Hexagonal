@@ -13,7 +13,7 @@ import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.Format
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.FormatoPPAEntity;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.FormatoTIAEntity;
 
-@Mapper(componentModel = "spring", uses = { IEstadoEntityMapper.class })
+@Mapper(componentModel = "spring", uses = { IEstadoEntityMapper.class, IEvaluacionObservacionEntityMapper.class})
 public interface IFormatoEntityMapper {
 
     @SubclassMapping(source = FormatoPPA.class, target = FormatoPPAEntity.class)
@@ -26,8 +26,7 @@ public interface IFormatoEntityMapper {
     @Mapping(target = "objDocente.objFormatoA", ignore = true)
     @Mapping(target = "objDocente.objHistorico", ignore = true)
     @Mapping(target = "estado.objFormato", ignore = true)
-    @Mapping(target = "evaluacion.objFormato", ignore = true)
-    @Mapping(target = "evaluacion.objObservacion", ignore = true)
+    
     FormatoA toDomain(FormatoAEntity formatoAEntity);
 
     List<FormatoA> toDomainList(List<FormatoAEntity> formatoAEntityList);
