@@ -14,6 +14,7 @@ import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.Evalua
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.FormatoAEntity;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IEvaluacionEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IEvaluacionObservacionEntityMapper;
+import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IFormatoEagerEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IFormatoEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.repositoros.IFormatoRepositorio;
 
@@ -29,11 +30,18 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
 
     private final IEvaluacionObservacionEntityMapper evaluacionObservacionEntityMapper;
 
+    private final IFormatoEagerEntityMapper formatoEagerEntityMapper;
+
     @Override
     @Transactional(readOnly = true)
     public FormatoA buscarFormatoPorId(Integer idFormato) {
         Optional<FormatoAEntity> formatoEntity = formatoRepositorio.findById(idFormato);
-        return formatoEntity.map(formatoEntityMapper::toDomain).orElse(null);
+        if (formatoEntity.isEmpty()) {
+            return null;
+        }
+        FormatoAEntity formatoAEntity = formatoEntity.get();
+        FormatoA formatoA = formatoEntityMapper.toDomain(formatoAEntity);
+        return formatoA;
     }
 
     @Override
@@ -59,6 +67,18 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
         if(ultimaEvaluacionEntity.isPresent()) {
             EvaluacionEntity evaluacionEntity = ultimaEvaluacionEntity.get();
             return evaluacionObservacionEntityMapper.toDomain(evaluacionEntity);
+        }else{
+            return null;
+        }
+    }
+
+    @Override
+    public FormatoA listarObservacionPorFormatoA(Integer idFormatoA) {
+        Optional<FormatoAEntity> formatoEntity = formatoRepositorio.findById(idFormatoA);
+        if(formatoEntity.isPresent()){
+            FormatoAEntity formato = formatoEntity.get();
+            return formatoEagerEntityMapper.toDomain(formato);
+
         }else{
             return null;
         }

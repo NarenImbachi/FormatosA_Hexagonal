@@ -15,8 +15,9 @@ import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.d
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.FormatoPPRespuestaDto;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.FormatoRespuestaDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.FormatoTIRespuestaDto;
+import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.ObservacionesFormatoRespuestaDTO;
 
-@Mapper(componentModel = "spring", uses = IDocenteRestMapper.class)
+@Mapper(componentModel = "spring", uses = { IDocenteRestMapper.class, IEvaluacionRestMapper.class })
 public interface IFormatoRestMapper {
 
     @SubclassMapping(source = FormatoPPPeticionDto.class, target = FormatoPPA.class)
@@ -31,4 +32,6 @@ public interface IFormatoRestMapper {
     FormatoRespuestaDTO toDTO(FormatoA formatoA);
 
     List<FormatoRespuestaDTO> toDTOList(List<FormatoA> formatoAList);
+
+    ObservacionesFormatoRespuestaDTO toObservacionesFormatoDTO(FormatoA formato);
 }

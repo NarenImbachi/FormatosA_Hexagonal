@@ -22,6 +22,7 @@ import com.unicauca.TallerP2.dominio.Modelos.FormatoA;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.RespuestaDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTOPeticion.FormatoPeticionDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.FormatoRespuestaDTO;
+import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.dto.DTORespuesta.ObservacionesFormatoRespuestaDTO;
 import com.unicauca.TallerP2.infraestructura.input.controllerGestionarFormatos.mappers.IFormatoRestMapper;
 
 import jakarta.validation.Valid;
@@ -38,9 +39,11 @@ public class ControladorFormato {
     private final IFormatoRestMapper formatoRestMapper;
 
     @PostMapping("/crear")
-    public ResponseEntity<RespuestaDTO<FormatoRespuestaDTO>> crearFormato(@Valid @RequestBody FormatoPeticionDTO formatoPeticionDTO) {
+    public ResponseEntity<RespuestaDTO<FormatoRespuestaDTO>> crearFormato(
+            @Valid @RequestBody FormatoPeticionDTO formatoPeticionDTO) {
         FormatoA formato = formatoRestMapper.toModel(formatoPeticionDTO);
-        FormatoRespuestaDTO formatoRespuestaDTO = formatoRestMapper.toDTO(formatoCommandInputPort.crearFormato(formato));
+        FormatoRespuestaDTO formatoRespuestaDTO = formatoRestMapper
+                .toDTO(formatoCommandInputPort.crearFormato(formato));
         var respuesta = RespuestaDTO.<FormatoRespuestaDTO>builder()
                 .data(formatoRespuestaDTO)
                 .status(201)
@@ -50,7 +53,8 @@ public class ControladorFormato {
     }
 
     @PutMapping("/cambiarEstado/{estado}/{idFormato}")
-    public ResponseEntity<RespuestaDTO<String>> cambiarEstado(@PathVariable Integer idFormato, @PathVariable String estado) {
+    public ResponseEntity<RespuestaDTO<String>> cambiarEstado(@PathVariable Integer idFormato,
+            @PathVariable String estado) {
         String mensaje = estadoInputPort.cambiarEstado(idFormato, estado);
         var respuesta = RespuestaDTO.<String>builder()
                 .data(mensaje)
@@ -64,9 +68,9 @@ public class ControladorFormato {
     public ResponseEntity<RespuestaDTO<List<FormatoRespuestaDTO>>> consultarFormato(
             @RequestParam String correo,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaInicio,
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaFin) 
-    {
-        List<FormatoA> formato = formatoQueryInputPort.buscarFormatoPorCorreoFechaInicioFin(correo, fechaInicio, fechaFin);
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date fechaFin) {
+        List<FormatoA> formato = formatoQueryInputPort.buscarFormatoPorCorreoFechaInicioFin(correo, fechaInicio,
+                fechaFin);
         List<FormatoRespuestaDTO> formatoRespuestaDTO = formatoRestMapper.toDTOList(formato);
         var respuesta = RespuestaDTO.<List<FormatoRespuestaDTO>>builder()
                 .data(formatoRespuestaDTO)
@@ -75,5 +79,18 @@ public class ControladorFormato {
                 .build();
         return respuesta.of();
     }
-    
+
+    @GetMapping("/observaciones/{idFormato}")
+    public ResponseEntity<RespuestaDTO<ObservacionesFormatoRespuestaDTO>> listarObservacionesPorFormato(
+            @PathVariable Integer idFormato) {
+        FormatoA formato = formatoQueryInputPort.buscarFormatoPorId(idFormato);
+        ObservacionesFormatoRespuestaDTO dto = formatoRestMapper.toObservacionesFormatoDTO(formato);
+        var respuesta = RespuestaDTO.<ObservacionesFormatoRespuestaDTO>builder()
+                .data(dto)
+                .status(200)
+                .message("Observaciones del formato consultadas exitosamente")
+                .build();
+        return respuesta.of();
+    }
+
 }

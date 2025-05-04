@@ -10,15 +10,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class EvaluacionRespuestaDTO {
+public class ObservacionesRespuestaDTO {
     private Integer id;
-
-    private String concepto;
-
-    private Date fechaRegistroConcepto;
-
-    private String nombreCoordinador;
-
-    private List<ObservacionCommandRespuestaDTO> observacion;
-
+    private String observacion;
+    private Date fechaRegistro;
+    private List<DocenteObservacionRespuestaDTO> objDocente;
 }

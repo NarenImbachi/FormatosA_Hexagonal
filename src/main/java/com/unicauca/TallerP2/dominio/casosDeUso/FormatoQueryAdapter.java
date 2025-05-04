@@ -21,13 +21,21 @@ public class FormatoQueryAdapter implements IFormatoQueryInputPort {
 
     @Override
     public FormatoA buscarFormatoPorId(Integer idFormato) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarFormatoPorId'");
+        return formatoQueryRepository.buscarFormatoPorId(idFormato);
     }
 
     @Override
     public List<FormatoA> buscarFormatoPorCorreoFechaInicioFin(String correo, Date fechaInicio, Date fechaFin) {
         List<FormatoA> formato = formatoQueryRepository.buscarFormatoPorCorreoFechaInicioFin(correo, fechaInicio, fechaFin);
+        if (formato == null) {
+            this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay formatos registrados en la base de datos");
+        }
+        return formato;
+    }
+
+    @Override
+    public FormatoA listarObservacionPorFormatoA(Integer idFormatoA) {
+        FormatoA formato = formatoQueryRepository.buscarFormatoPorId(idFormatoA);
         if (formato == null) {
             this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay formatos registrados en la base de datos");
         }

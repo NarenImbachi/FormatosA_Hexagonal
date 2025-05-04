@@ -11,4 +11,6 @@ public interface IFormatoQueryRepository {
     public boolean existeFormatoPorTitulo(String titulo);
     public List<FormatoA> buscarFormatoPorCorreoFechaInicioFin(String correo, Date fechaInicio, Date fechaFin);
     public Evaluacion obtenerUltimaEvaluacion(Integer idFormatoA);
+    public FormatoA listarObservacionPorFormatoA(Integer idFormatoA);
+
 }

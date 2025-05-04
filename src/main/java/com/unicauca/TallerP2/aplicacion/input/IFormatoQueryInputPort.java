@@ -8,4 +8,5 @@ import com.unicauca.TallerP2.dominio.Modelos.FormatoA;
 public interface IFormatoQueryInputPort {
     public FormatoA buscarFormatoPorId(Integer idFormato);
     public List<FormatoA> buscarFormatoPorCorreoFechaInicioFin(String correo, Date fechaInicio, Date fechaFin);
+    public FormatoA listarObservacionPorFormatoA(Integer idFormatoA);
 }
