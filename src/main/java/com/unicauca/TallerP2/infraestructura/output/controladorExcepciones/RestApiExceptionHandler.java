@@ -22,6 +22,7 @@ import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.estru
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.estructuraExcepciones.Error;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadNoExisteException;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
+import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.EstadoInvalidoException;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
 
 
@@ -55,7 +56,24 @@ public class RestApiExceptionHandler {
         public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
                         final ReglaNegocioExcepcion ex, final Locale locale) {
                 final Error error = ErrorUtils
-                                .crearError(CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getCodigo(), ex.formatException(),
+                                .crearError(CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getCodigo(),
+                                                String.format("%s, %s",
+                                                                CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getLlaveMensaje(),
+                                                                ex.getMessage()),
+                                                HttpStatus.BAD_REQUEST.value())
+                                .setUrl(req.getRequestURL().toString()).setMetodo(req.getMethod());
+                return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        }
+
+
+        @ExceptionHandler(EstadoInvalidoException.class)
+        public ResponseEntity<Error> handleGenericException(final HttpServletRequest req,
+                        final EstadoInvalidoException ex, final Locale locale) {
+                final Error error = ErrorUtils
+                                .crearError(CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getCodigo(),
+                                                String.format("%s, %s",
+                                                                CodigoError.VIOLACION_REGLA_DE_NEGOCIO.getLlaveMensaje(),
+                                                                ex.getMessage()),
                                                 HttpStatus.BAD_REQUEST.value())
                                 .setUrl(req.getRequestURL().toString()).setMetodo(req.getMethod());
                 return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);

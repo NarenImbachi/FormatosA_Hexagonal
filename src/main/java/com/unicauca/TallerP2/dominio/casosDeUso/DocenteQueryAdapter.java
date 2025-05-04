@@ -38,11 +38,11 @@ public class DocenteQueryAdapter implements IDocenteQueryInputPort {
     }
 
     @Override
-    public Docente formatosPorDocente(Integer idDocente) {
-        Docente docente = docenteQueryRepositoryPort.formatosPorDocente(idDocente);
-        if (docente == null) {
-            this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay docentes registrados en la base de datos");
+    public Docente formatosPorDocente(Integer idDocente) {   
+        if (!docenteQueryRepositoryPort.existeDocente(idDocente)) {
+            this.formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no hay docentes registrados con ese id en la base de datos");
         }
+        Docente docente = docenteQueryRepositoryPort.formatosPorDocente(idDocente);
         return docente;
     }
     
