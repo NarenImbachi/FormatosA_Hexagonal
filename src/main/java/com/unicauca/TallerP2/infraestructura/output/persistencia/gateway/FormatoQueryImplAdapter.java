@@ -12,7 +12,6 @@ import com.unicauca.TallerP2.dominio.Modelos.Evaluacion;
 import com.unicauca.TallerP2.dominio.Modelos.FormatoA;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.EvaluacionEntity;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.FormatoAEntity;
-import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IEvaluacionEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IEvaluacionObservacionEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IFormatoEagerEntityMapper;
 import com.unicauca.TallerP2.infraestructura.output.persistencia.mappers.IFormatoEntityMapper;

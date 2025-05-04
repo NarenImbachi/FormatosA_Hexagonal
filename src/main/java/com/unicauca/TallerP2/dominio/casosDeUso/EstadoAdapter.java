@@ -1,7 +1,5 @@
 package com.unicauca.TallerP2.dominio.casosDeUso;
 
-import org.springframework.stereotype.Service;
-
 import com.unicauca.TallerP2.aplicacion.input.IEstadoInputPort;
 import com.unicauca.TallerP2.aplicacion.output.IFormatoCommandRepositoryPort;
 import com.unicauca.TallerP2.aplicacion.output.IFormatoQueryRepository;
@@ -14,7 +12,6 @@ import com.unicauca.TallerP2.dominio.Modelos.PatronEstado.EstRechazado;
 import com.unicauca.TallerP2.dominio.Modelos.PatronEstado.Resultado;
 import com.unicauca.TallerP2.dominio.service.EstadoService;
 
-@Service
 public class EstadoAdapter implements IEstadoInputPort {
 
     private EstadoService estadoService;
