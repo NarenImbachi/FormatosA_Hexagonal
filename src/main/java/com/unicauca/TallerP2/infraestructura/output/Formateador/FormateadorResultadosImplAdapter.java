@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.unicauca.TallerP2.aplicacion.output.IFormeadorResultadoOutputPort;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadNoExisteException;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.EntidadYaExisteException;
+import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.EstadoInvalidoException;
 import com.unicauca.TallerP2.infraestructura.output.controladorExcepciones.excepcionesPropias.ReglaNegocioExcepcion;
 
 @Service
@@ -25,6 +26,12 @@ public class FormateadorResultadosImplAdapter implements IFormeadorResultadoOutp
     @Override
     public void retornarRespuestaErrorEntidadNoExiste(String mensaje) {
         EntidadNoExisteException objException = new EntidadNoExisteException(mensaje);
+        throw objException;
+    }
+
+    @Override
+    public void retornarRespuestaErrorEstadoInvalidoParaObservacion(String mensaje) {
+        EstadoInvalidoException objException = new EstadoInvalidoException(mensaje);
         throw objException;
     }
     

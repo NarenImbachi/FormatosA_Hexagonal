@@ -6,4 +6,6 @@ public interface IFormeadorResultadoOutputPort {
     public void retornarRespuestaErrorEntidadNoExiste(String mensaje);
 
     public void retornarRespuestaErrorReglaDeNegocio(String mensaje);
+
+    public void retornarRespuestaErrorEstadoInvalidoParaObservacion(String mensaje);
 }

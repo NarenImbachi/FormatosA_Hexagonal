@@ -56,9 +56,9 @@ public class BeanConfiguratios {
     @Bean
     ObservacionCommandAdapter observacionCommandAdapter(IObservacionCommandRepositoryPort observacionCommandRepositoryPort,
             IFormatoQueryRepository formatoQueryRepository, IDocenteQueryRepositoryPort docenteQueryRepositoryPort,
-            IEvaluacionCommandRepository evaluacionCommandRepository) {
+            IEvaluacionCommandRepository evaluacionCommandRepository, IFormeadorResultadoOutputPort formeadorResultadoOutputPort) {
         return new ObservacionCommandAdapter(observacionCommandRepositoryPort, formatoQueryRepository,
-                docenteQueryRepositoryPort, evaluacionCommandRepository);
+                docenteQueryRepositoryPort, evaluacionCommandRepository, formeadorResultadoOutputPort);
     }
 
 }

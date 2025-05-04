@@ -7,6 +7,7 @@ import com.unicauca.TallerP2.aplicacion.input.IObservacionCommandInputPort;
 import com.unicauca.TallerP2.aplicacion.output.IDocenteQueryRepositoryPort;
 import com.unicauca.TallerP2.aplicacion.output.IEvaluacionCommandRepository;
 import com.unicauca.TallerP2.aplicacion.output.IFormatoQueryRepository;
+import com.unicauca.TallerP2.aplicacion.output.IFormeadorResultadoOutputPort;
 import com.unicauca.TallerP2.aplicacion.output.IObservacionCommandRepositoryPort;
 import com.unicauca.TallerP2.dominio.Modelos.Docente;
 import com.unicauca.TallerP2.dominio.Modelos.Evaluacion;
@@ -19,18 +20,27 @@ public class ObservacionCommandAdapter implements IObservacionCommandInputPort {
     private final IFormatoQueryRepository formatoQueryRepository;
     private final IDocenteQueryRepositoryPort docenteQueryRepositoryPort;
     private final IEvaluacionCommandRepository evaluacionCommandRepository;
+    private final IFormeadorResultadoOutputPort formeadorResultadoOutputPort;
 
     public ObservacionCommandAdapter(IObservacionCommandRepositoryPort observacionCommandRepositoryPort,
             IFormatoQueryRepository formatoQueryRepository, IDocenteQueryRepositoryPort docenteQueryRepositoryPort,
-            IEvaluacionCommandRepository evaluacionCommandRepository) {
+            IEvaluacionCommandRepository evaluacionCommandRepository,
+            IFormeadorResultadoOutputPort formeadorResultadoOutputPort) {
         this.observacionCommandRepositoryPort = observacionCommandRepositoryPort;
         this.formatoQueryRepository = formatoQueryRepository;
         this.docenteQueryRepositoryPort = docenteQueryRepositoryPort;
         this.evaluacionCommandRepository = evaluacionCommandRepository;
+        this.formeadorResultadoOutputPort = formeadorResultadoOutputPort;
     }
 
     @Override
     public Observacion crearObservacion(String observacionTexto, Integer idFormatoA, List<Integer> docentesId) {
+
+        FormatoA formato = formatoQueryRepository.buscarFormatoPorId(idFormatoA);
+        if(!formato.getEstado().getEstadoActual().equals("evaluado")){
+            formeadorResultadoOutputPort.retornarRespuestaErrorEstadoInvalidoParaObservacion("Error, no se pueden agregar observaciones a un formato con estado diferente a evaluado");
+        }
+
         Evaluacion ultimaEvaluacion = formatoQueryRepository.obtenerUltimaEvaluacion(idFormatoA);
 
         if (ultimaEvaluacion == null) {
@@ -50,7 +60,7 @@ public class ObservacionCommandAdapter implements IObservacionCommandInputPort {
 
         List<Docente> docentes = docenteQueryRepositoryPort.listarDocentesPorIds(docentesId);
         if (docentes.isEmpty()) {
-            throw new IllegalArgumentException("No se encontraron docentes con los IDs proporcionados.");
+            formeadorResultadoOutputPort.retornarRespuestaErrorEntidadNoExiste("Error, no se encontraron docentes con los IDs proporcionados");
         }
 
         Observacion nuevaObservacion = new Observacion();
