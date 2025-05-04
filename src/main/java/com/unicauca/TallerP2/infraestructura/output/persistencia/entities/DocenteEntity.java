@@ -34,7 +34,7 @@ public class DocenteEntity {
     @Column(nullable = false, length = 100, unique = true)
     private String correo;
 
-    @Column(nullable = false, length = 50, unique = true)
+    @Column(nullable = false, length = 50)
     private String nombreGrupo;
 
     @ManyToMany(mappedBy = "objDocente", fetch = FetchType.LAZY)

@@ -13,7 +13,7 @@ public class EstFormulado implements IntEstado{
     @Override
     public Resultado enviarAEvaluacion(Integer idFormato) {
         formatoCommandRepositoryPort.cambiarEstado(idFormato, "evalacuion");
-        return new Resultado(true, "El formato ha sido aprobado exitosamente");
+        return new Resultado(true, "El formato ha sido enviado a evalacuion exitosamente");
     }
 
     @Override

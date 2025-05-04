@@ -115,7 +115,7 @@ public class RestApiExceptionHandler {
                 String customMessage = "El cuerpo de la solicitud no es legible: " + knownTypesInfo;
 
                 Map<String, String> errores = new HashMap<>();
-                errores.put("error", customMessage);
+                errores.put("tipoFormato", customMessage);
                 return new ResponseEntity<>(errores, HttpStatus.BAD_REQUEST);
         }
 }
