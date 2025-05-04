@@ -13,6 +13,7 @@ public interface IObservacionRestMapper {
     @Mapping(target = "objDocente", source = "objDocente") 
     ObservacionCommandRespuestaDTO toDTO(Observacion observacion);
 
+    @Mapping(target = "id" , ignore = true)
     @Mapping(target = "fechaRegistro", ignore = true)
     @Mapping(target = "objEvaluacion", ignore = true)
     @Mapping(target = "objDocente", ignore = true)
