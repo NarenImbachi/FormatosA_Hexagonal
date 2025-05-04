@@ -5,13 +5,16 @@ import org.springframework.context.annotation.Configuration;
 
 import com.unicauca.TallerP2.aplicacion.output.IDocenteCommandRepositoryPort;
 import com.unicauca.TallerP2.aplicacion.output.IDocenteQueryRepositoryPort;
+import com.unicauca.TallerP2.aplicacion.output.IEvaluacionCommandRepository;
 import com.unicauca.TallerP2.aplicacion.output.IFormatoCommandRepositoryPort;
 import com.unicauca.TallerP2.aplicacion.output.IFormatoQueryRepository;
 import com.unicauca.TallerP2.aplicacion.output.IFormeadorResultadoOutputPort;
+import com.unicauca.TallerP2.aplicacion.output.IObservacionCommandRepositoryPort;
 import com.unicauca.TallerP2.dominio.casosDeUso.DocenteCommandAdapter;
 import com.unicauca.TallerP2.dominio.casosDeUso.DocenteQueryAdapter;
 import com.unicauca.TallerP2.dominio.casosDeUso.FormatoCommandAdapter;
 import com.unicauca.TallerP2.dominio.casosDeUso.FormatoQueryAdapter;
+import com.unicauca.TallerP2.dominio.casosDeUso.ObservacionCommandAdapter;
 
 @Configuration
 public class BeanConfiguratios {
@@ -43,5 +46,11 @@ public class BeanConfiguratios {
         return new FormatoQueryAdapter(formatoQueryRepository, formeadorResultadoOutputPort);
     }
     
+    @Bean
+    ObservacionCommandAdapter observacionCommandAdapter(IObservacionCommandRepositoryPort observacionCommandRepositoryPort,
+            IFormatoQueryRepository formatoQueryRepository, IDocenteQueryRepositoryPort docenteQueryRepositoryPort, IEvaluacionCommandRepository evaluacionCommandRepository) {
+        
+        return new ObservacionCommandAdapter(observacionCommandRepositoryPort, formatoQueryRepository, docenteQueryRepositoryPort, evaluacionCommandRepository);
+    }
 
 }

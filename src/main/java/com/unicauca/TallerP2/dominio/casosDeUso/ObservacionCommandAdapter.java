@@ -3,8 +3,6 @@ package com.unicauca.TallerP2.dominio.casosDeUso;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.unicauca.TallerP2.aplicacion.input.IObservacionCommandInputPort;
 import com.unicauca.TallerP2.aplicacion.output.IDocenteQueryRepositoryPort;
 import com.unicauca.TallerP2.aplicacion.output.IEvaluacionCommandRepository;
@@ -15,7 +13,6 @@ import com.unicauca.TallerP2.dominio.Modelos.Evaluacion;
 import com.unicauca.TallerP2.dominio.Modelos.FormatoA;
 import com.unicauca.TallerP2.dominio.Modelos.Observacion;
 
-@Service
 public class ObservacionCommandAdapter implements IObservacionCommandInputPort {
 
     private final IObservacionCommandRepositoryPort observacionCommandRepositoryPort;
