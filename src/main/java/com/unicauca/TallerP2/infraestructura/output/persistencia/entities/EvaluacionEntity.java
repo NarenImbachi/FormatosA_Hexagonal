@@ -36,7 +36,7 @@ public class EvaluacionEntity {
     @Column(nullable = true)
     private String nombreCoordinador;
 
-    @OneToMany(mappedBy = "objEvaluacion", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "objEvaluacion", fetch = FetchType.LAZY)
     private List<ObservacionEntity> observacion;
 
     @ManyToOne

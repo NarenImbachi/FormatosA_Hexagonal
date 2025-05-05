@@ -1,6 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.output.persistencia.gateway;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.unicauca.TallerP2.aplicacion.output.IEvaluacionCommandRepository;
 import com.unicauca.TallerP2.dominio.Modelos.Evaluacion;
@@ -20,6 +21,7 @@ public class EvaluacionCommandImplAdapter implements IEvaluacionCommandRepositor
     private final IEvaluacionObservacionEntityMapper evaluacionObservacionEntityMapper;
     
     @Override
+    @Transactional
     public Evaluacion crearEvaluacion(Evaluacion evaluacion) {
         EvaluacionEntity evaluacionEntity = evaluacionObservacionEntityMapper.toEntity(evaluacion);
         evaluacionEntity.setObjFormato(formatoRepositorio.getReferenceById(evaluacion.getObjFormato().getId()));

@@ -37,7 +37,7 @@ public class ObservacionCommandAdapter implements IObservacionCommandInputPort {
     public Observacion crearObservacion(String observacionTexto, Integer idFormatoA, List<Integer> docentesId) {
 
         FormatoA formato = formatoQueryRepository.buscarFormatoPorId(idFormatoA);
-        if(!formato.getEstado().getEstadoActual().equals("evaluado")){
+        if(!formato.getEstado().getEstadoActual().equals("evaluacion")){
             formeadorResultadoOutputPort.retornarRespuestaErrorEstadoInvalidoParaObservacion("Error, no se pueden agregar observaciones a un formato con estado diferente a evaluado");
         }
 

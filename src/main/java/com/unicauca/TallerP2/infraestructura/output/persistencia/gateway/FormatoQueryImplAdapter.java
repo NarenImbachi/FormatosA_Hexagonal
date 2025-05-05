@@ -46,7 +46,7 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
     @Override
     @Transactional(readOnly = true)
     public boolean existeFormatoPorTitulo(String titulo) {
-        return formatoRepositorio.existsByTitulo(titulo);
+        return formatoRepositorio.existsByTitulo(titulo) > 0;
     }
 
     @Override
@@ -72,6 +72,7 @@ public class FormatoQueryImplAdapter implements IFormatoQueryRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public FormatoA listarObservacionPorFormatoA(Integer idFormatoA) {
         Optional<FormatoAEntity> formatoEntity = formatoRepositorio.findById(idFormatoA);
         if(formatoEntity.isPresent()){

@@ -1,6 +1,7 @@
 package com.unicauca.TallerP2.infraestructura.output.persistencia.gateway;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.unicauca.TallerP2.aplicacion.output.IObservacionCommandRepositoryPort;
 import com.unicauca.TallerP2.dominio.Modelos.Observacion;
@@ -21,6 +22,7 @@ public class ObservacionCommandImplAdapter  implements IObservacionCommandReposi
     private final IEvaluacionRepositorio evaluacionRepositorio;
 
     @Override
+    @Transactional
     public Observacion crearObservacion(Observacion observacion) {
         ObservacionEntity observacionEntity = observacionCommandEntityMapper.toEntity(observacion);
         EvaluacionEntity evaluacion = evaluacionRepositorio.getReferenceById(observacion.getObjEvaluacion().getId());

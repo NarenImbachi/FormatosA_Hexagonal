@@ -13,7 +13,16 @@ import com.unicauca.TallerP2.infraestructura.output.persistencia.entities.Format
 
 public interface IFormatoRepositorio extends JpaRepository<FormatoAEntity, Integer> {
     Optional<FormatoAEntity> findById(Integer id);
-    boolean existsByTitulo(String titulo);
+
+    @Query(value = """
+        SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END FROM (
+            SELECT titulo FROM formatosPPA WHERE titulo = :titulo
+            UNION
+            SELECT titulo FROM formatosTIA WHERE titulo = :titulo
+        ) AS sub
+        """, nativeQuery = true)
+    int existsByTitulo(@Param("titulo") String titulo);
+    
     boolean existsById(Integer id);
 
     @Query("SELECT f FROM FormatoAEntity f " +
