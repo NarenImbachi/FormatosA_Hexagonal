@@ -10,6 +10,8 @@ import com.unicauca.TallerP2.aplicacion.output.IFormatoCommandRepositoryPort;
 import com.unicauca.TallerP2.aplicacion.output.IFormatoQueryRepository;
 import com.unicauca.TallerP2.aplicacion.output.IFormeadorResultadoOutputPort;
 import com.unicauca.TallerP2.aplicacion.output.IObservacionCommandRepositoryPort;
+import com.unicauca.TallerP2.dominio.Modelos.PatronEstado.EstEvaluacion;
+import com.unicauca.TallerP2.dominio.Modelos.PatronEstado.IntEstado;
 import com.unicauca.TallerP2.dominio.casosDeUso.DocenteCommandAdapter;
 import com.unicauca.TallerP2.dominio.casosDeUso.DocenteQueryAdapter;
 import com.unicauca.TallerP2.dominio.casosDeUso.EstadoAdapter;
@@ -59,6 +61,16 @@ public class BeanConfiguratios {
             IEvaluacionCommandRepository evaluacionCommandRepository, IFormeadorResultadoOutputPort formeadorResultadoOutputPort) {
         return new ObservacionCommandAdapter(observacionCommandRepositoryPort, formatoQueryRepository,
                 docenteQueryRepositoryPort, evaluacionCommandRepository, formeadorResultadoOutputPort);
+    }
+
+    @Bean
+    EstadoService estadoService(IntEstado estado) {
+        return new EstadoService(estado);
+    }
+
+    @Bean
+    EstEvaluacion estEvaluacion(IFormatoCommandRepositoryPort formatoCommandRepositoryPort) {
+        return new EstEvaluacion(formatoCommandRepositoryPort);
     }
 
 }

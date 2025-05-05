@@ -1,7 +1,5 @@
 package com.unicauca.TallerP2.dominio.service;
 
-import org.springframework.stereotype.Service;
-
 import com.unicauca.TallerP2.dominio.Modelos.PatronEstado.IntEstado;
 import com.unicauca.TallerP2.dominio.Modelos.PatronEstado.Resultado;
 
@@ -10,7 +8,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Service
 public class EstadoService {
     
     private IntEstado estadoActual;
